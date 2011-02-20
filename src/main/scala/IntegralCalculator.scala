@@ -13,6 +13,7 @@ import Actor._
 
 /******************************************************************************
 Akka Integral Calculator
+******************************************************************************/
 
 /**
  * Test runner emulating an integral calculation.
@@ -20,6 +21,6 @@ Akka Integral Calculator
 object Runner {
   def run = {
     
-    println(""Starting the calculation)
+    println("Starting the calculation")
   }
 }
