@@ -1,0 +1,75 @@
+/***************************
+* Akka Integral Calculator *
+*                          *
+*             Yann Nicolas *
+*        yannart@gmail.com *
+****************************/
+
+
+INTRODUCTION
+
+This application calculates an approximation of the integral of a polynomial in a defined interval using Akka actors.
+For that, the area under the curve is calculated using the Simpson rule (http://en.wikipedia.org/wiki/Simpson's_rule)
+As the area under the curve for an interval is equal to the sum of the areas of subintervals, that computation can be done parallely.
+
+To make it more interesting, there are two instances of the program running:
+	
+	- Server
+		The server performs the computation with the parameters sent by the client.
+		For this example it runs locally (localhost) but can be running in another machine.
+		
+	- Client
+		The client configures the values of the computation: Polynomial coefficients, precision.
+		It also calculates the exact integral to verify the result of the approximation. 
+		
+	Note that in this example, the client connects only to a single server,
+	but it is easy to add more of them dividing the integral interval.
+
+
+INSTRUCTIONS
+
+- REQUIREMENTS
+
+	- Java 1.6
+
+	- Install Akka: http://akka.io/downloads/
+
+	- Install SBT: http://code.google.com/p/simple-build-tool/
+
+	- Download the project with Git or unzip it if you download the archive (https://github.com/yannart/ParallelPolynomialIntegral)
+
+- BUILD
+	- Go to the project folder on your terminal
+	- run the following commands to download the dependencies and compile the project:
+		> sbt update
+		> sbt compile
+		- optionally, to generate an Eclipse project with the configuration for Scala IDE, run:
+		> sbt eclipse
+
+- RUN
+	- Open two terminals
+	- Terminal 1, Server:
+		> sbt console
+		> scala> import com.yannart.akka.integralcalculator._
+		> scala> Runner.runServer
+		
+	- Terminal 2, Client:
+		> sbt console
+		> scala> import com.yannart.akka.integralcalculator._
+		> scala> Runner.runClient
+		
+	Note that you can execute again the client without restarting the server.
+		
+- EXAMPLE OF RUN
+
+	Depending of your Akka configuration, you will have a lot of log messages,
+	but at the end, in the Client terminal, you will have a message like:
+
+		Polynomial equation is  - 1.0 - 4.0X + 3.0X^2 - 2.0X^3 + X^4 + 4.0X^5
+		Integral to be calculated in [ -10.0 , 10.0 ]
+		Approximate integral calculated using steps of 0.0010
+		Integral equation is  - X - 2.0X^2 + X^3 - 0.5X^4 + 0.2X^5 + 0.6666666666666666X^6
+		Real integral value = 41980.0 (calculated in 3 ms)
+		Approximate integral value = 41979.999999922395 (calculated in 6381 ms)
+		Error = 1.8486270584297384E-10%
+	
