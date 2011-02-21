@@ -7,7 +7,6 @@
 			
 	<dependencies>
 		<dependency org="se.scalablesolutions.akka" name="akka" rev="1.0" />
-		<dependency org="se.scalablesolutions.akka" name="akka-persistence-redis" rev="1.0" />
 	</dependencies>
 </ivy-module>
 
