@@ -8,4 +8,5 @@ project/plugins/lib_managed
 project/plugins/project/
 project/plugins/src_managed/
 project/plugins/target/
-
+.scala_dependencies
+.settings/
